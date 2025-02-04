@@ -3,51 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ตัวอย่างที่ 15</title>
+    <title>ตัวอย่างที่ 16 - สไลด์โชว์รูปภาพ</title>
+   
 </head>
 <body>
-    <div id="example15">
-        <h3>15. เคริ่องคิดเลขพื้นฐาน</h3>
-        <input type="number" id="num1" placeholder="ตัวเลขที่ 1">
-        <select id="operator">
-            <option value="+">+</option>
-            <option value="-">-</option>
-            <option value="*">x</option>
-            <option value="/">÷</option>
-        </select>
-        <input type="number" id="num2" placeholder="ตัวเลขที่ 2">
-        <button onclick="calculate()">=</button>
-        <span id="result"></span>
-
-        <script>
-            // ฟังก์ชันคำนวณ
-            function calculate(){
-                // รับค่าจาก input และ select
-                const num1 = parseFloat(document.getElementById("num1").value);
-                const num2 = parseFloat(document.getElementById("num2").value);
-                const operator = document.getElementById("operator").value;
-                let result;
-                // คำนวณตามเครื่องหมายที่เลือก
-                switch (operator) {
-                case "+":
-                    result = num1 + num2;
-                    break;
-                case "-":
-                    result = num1 - num2;
-                    break;
-                case "*":
-                    result = num1 * num2;
-                    break;
-                case "/":
-                    result = num1 / num2;
-                    break;
-            }
-            // ผลลัพธ์
-            document.getElementById("result").textContent = isNaN(result)
-                ? "กรุณาใส่ตัวเลข"
-                : ` = ${result}`;
+    <div id="example16">
+        <h3>16. สไลด์โชว์รูปภาพ</h3>
+        <div class="slideshow">
+            <div>
+                <!-- รูปภาพที่จะแสดงในสไลด์โชว์ -->
+                <img id="slideImage" src="https://www.guilinlake.com/images/2017/08/07150820172514564839-guilinlake-400x300.jpg" alt="slideshow" />
+            </div>
+            <!-- ปุ่มเปลี่ยนสไลด์ -->
+            <button onclick="changeSlide(-1)">ก่อนหน้า</button>
+            <button onclick="changeSlide(1)">ถัดไป</button>
+        </div>
+    <style>
+        /* จัดตำแหน่งสไลด์โชว์ให้อยู่กึ่งกลาง */
+        .slideshow {
+            text-align: center;
         }
-        </script>
+        /* กำหนดขนาดและระยะห่างของรูปภาพ */
+        .slideshow img {
+            max-width: 400px;
+            height: 300px;
+            margin: 10px;
+        }
+    </style>
+    
+    <script>
+        // สร้าง Array เก็บ URL รูปภาพ
+        const images = [
+            "https://www.guilinlake.com/images/2017/08/07150820172514564839-guilinlake-400x300.jpg",
+            "https://www.guilinlake.com/images/2017/10/06190320183014561037-guilinlake-400x300.jpg",
+            "https://www.guilinlake.com/images/2017/10/13231020174303448033-guilinlake-300x225.jpg",
+        ];
+        
+        let currentSlide = 0; // เก็บดัชนีของรูปภาพปัจจุบัน
+        
+        // ฟังก์ชันเปลี่ยนสไลด์
+        function changeSlide(direction) {
+            // คำนวณ index ของสไลด์ถัดไป
+            currentSlide = (currentSlide + direction + images.length) % images.length;
+            
+            // อัปเดตรูปภาพที่แสดงในสไลด์โชว์
+            document.getElementById("slideImage").src = images[currentSlide];
+        }
+    </script>
     </div>
 </body>
 </html>
